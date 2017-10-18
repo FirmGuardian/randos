@@ -5,7 +5,6 @@ import (
 	"crypto/sha512"
 	"encoding/hex"
 	"fmt"
-	"golang.org/x/crypto/sha3"
 	"os"
 )
 
@@ -21,32 +20,31 @@ type finfo struct {
 }
 
 var throttle = make(chan int)
-var hash = make(chan string)
 
 func main() {
 	fmt.Println("Creating benchmark files...")
 	files := []finfo{
-		finfo{
+		{
 			name: "megs1",
 			size: onemeg,
 		},
-		finfo{
+		{
 			name: "megs2",
 			size: onemeg * 2,
 		},
-		finfo{
+		{
 			name: "megs15",
 			size: onemeg * 15,
 		},
-		finfo{
+		{
 			name: "megs60",
 			size: onemeg * 60,
 		},
-		finfo{
+		{
 			name: "megs120",
 			size: onemeg * 120,
 		},
-		finfo{
+		{
 			name: "megs240",
 			size: onemeg * 240,
 		},
