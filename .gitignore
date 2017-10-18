@@ -16,3 +16,6 @@
 .idea/
 bin/
 pkg/
+
+benchmark-file-megs*.rando
+CHECKSUM.SHA512-benchmark-file

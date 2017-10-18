@@ -5,6 +5,7 @@ import (
 	"crypto/sha512"
 	"encoding/hex"
 	"fmt"
+	"github.com/CrowdSurge/banner"
 	"os"
 )
 
@@ -21,41 +22,44 @@ type finfo struct {
 
 var throttle = make(chan int)
 
+var files = []finfo{
+	{
+		name: "megs1",
+		size: onemeg,
+	},
+	{
+		name: "megs2",
+		size: onemeg * 2,
+	},
+	{
+		name: "megs15",
+		size: onemeg * 15,
+	},
+	{
+		name: "megs60",
+		size: onemeg * 60,
+	},
+	{
+		name: "megs120",
+		size: onemeg * 120,
+	},
+	{
+		name: "megs240",
+		size: onemeg * 240,
+	},
+	{
+		name: "megs512",
+		size: onemeg * 512,
+	},
+	{
+		name: "megs740",
+		size: onemeg * 740,
+	},
+}
+
 func main() {
-	files := []finfo{
-		{
-			name: "megs1",
-			size: onemeg,
-		},
-		{
-			name: "megs2",
-			size: onemeg * 2,
-		},
-		{
-			name: "megs15",
-			size: onemeg * 15,
-		},
-		{
-			name: "megs60",
-			size: onemeg * 60,
-		},
-		{
-			name: "megs120",
-			size: onemeg * 120,
-		},
-		{
-			name: "megs240",
-			size: onemeg * 240,
-		},
-		{
-			name: "megs512",
-			size: onemeg * 512,
-		},
-		{
-			name: "megs740",
-			size: onemeg * 740,
-		},
-	}
+	banner.Print("rando")
+	fmt.Println(sumOfSizes(files))
 
 	fmt.Println("Creating benchmark files...")
 
@@ -79,6 +83,16 @@ func main() {
 	}
 
 	fmt.Println("All done!")
+}
+
+func sumOfSizes(sizes []finfo) int {
+	n := uint32(0)
+
+	for _, sz := range sizes {
+		n += sz.size
+	}
+
+	return int(n / onemeg)
 }
 
 func makeFile(idx int, name string, sz uint32) string {
