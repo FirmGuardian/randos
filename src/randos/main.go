@@ -65,6 +65,7 @@ func main() {
 
 	for i, file := range files {
 		sum := makeFile(i, file.name, file.size)
+		// The beginning to a thought. It's incomplete, and not helping or hurting anything.
 		go func() {
 			throttle <- 1
 			// generate sha256, and write it async
