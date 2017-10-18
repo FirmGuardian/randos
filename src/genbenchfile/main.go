@@ -22,7 +22,6 @@ type finfo struct {
 var throttle = make(chan int)
 
 func main() {
-	fmt.Println("Creating benchmark files...")
 	files := []finfo{
 		{
 			name: "megs1",
@@ -48,7 +47,17 @@ func main() {
 			name: "megs240",
 			size: onemeg * 240,
 		},
+		{
+			name: "megs512",
+			size: onemeg * 512,
+		},
+		{
+			name: "megs740",
+			size: onemeg * 740,
+		},
 	}
+
+	fmt.Println("Creating benchmark files...")
 
 	// our checksum file, for matching convenience
 	sumFile, _ := os.Create("./CHECKSUM.SHA512-" + prefix)
